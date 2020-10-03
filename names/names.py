@@ -31,27 +31,33 @@ class BSTNode:
                 self.right.insert(value)
     
     def contains(self, target):
-        if target > self.value and self.right is not None:
-            return self.right.contains(target)
-        elif self.left is not None:
-            return self.left.contains(target)
-        else:
+        if self.value == target:
             return True
+        elif self.value > target:
+            if self.left is None:
+                return False
+            else:
+                return self.left.contains(target)
+        else:
+            if self.right is None:
+                return False
+            else:
+                return self.right.contains(target)
 
 
 # Replace the nested for loops below with your improvements
 binary_search_tree = BSTNode("")
-
-for name in names_1:
-    binary_search_tree.insert(name)
-for name in names_2:
-    if binary_search_tree.contains(name):
-        duplicates.append(name)
+#O(1)
+for name in names_1:   #O(n)
+    binary_search_tree.insert(name)#O(1)
+for name in names_2:   #O(n)
+    if binary_search_tree.contains(name):#O(1)
+        duplicates.append(name)#O(1)
 
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
 print (f"runtime: {end_time - start_time} seconds")
-
+print(len(duplicates))
 # ---------- Stretch Goal -----------
 # Python has built-in tools that allow for a very efficient approach to this problem
 # What's the best time you can accomplish?  Thare are no restrictions on techniques or data
